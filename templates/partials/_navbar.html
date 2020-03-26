@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-md fixed-top navbar-light bg-light mb-5 py-0">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'pages:home' %}">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                {% url 'pages:home' as home %}
+                {% url 'pages:about' as about %}
+                {% url 'products:list' as product %}
+                {% url 'contacts:contact' as contact %}
+                <li class="nav-item {% if request.path == home %} active {% endif %}">
+                    <a class="nav-link" href="{% url 'pages:home' %}">Home</a>
+                </li>
+                <li class="nav-item {% if request.path == product %} active {% endif %}">
+                    <a class="nav-link" href="{% url 'products:list' %}">Products</a>
+                </li>
+                <li class="nav-item {% if request.path == about %} active {% endif %}">
+                    <a class="nav-link" href="{% url 'pages:about' %}">About</a>
+                </li>
+                <li class="nav-item {% if request.path == contact %} active {% endif %}">
+                    <a class="nav-link" href="{% url 'contacts:contact' %}">Contact</a>
+                </li>
+            </ul>
+            <form class="form-inline mt-2 mt-md-0">
+                <input class="form-control form-control-sm mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success btn-sm my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+<hr class="mb-5">
+
+
+

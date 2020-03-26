@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block title %} | Welcome {% endblock %}
+
+{% block style %}
+    <style>
+    </style>
+{% endblock %}
+
+{% block content %}
+    <!-- <div class="jumbotron">
+        <h1>Navbar example</h1>
+        <p class="lead">This example is a quick exercise to illustrate how the top-aligned navbar works. As you
+            scroll, this navbar remains in its original position and moves with the rest of the page.</p>
+        <a class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">View navbar docs &raquo;</a>
+    </div> -->
+    <div class="container">
+        <div class="row">
+            <!-- <div class="col-sm-12"> -->
+                <h3 class="col-12">Products Lists</h3>
+                <hr>
+                {% if products %}
+                    {% for product in products %}
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card listing-preview">
+                                {% for item in product.productimage_set.all %}
+                                    <img class="card-img-top" src="{{ item.image.url }}" alt="">
+                                {% endfor %}
+                                <div class="card-img-overlay">
+                                    <h2>
+                                        <span class="badge badge-secondary text-white">Sh{{ product.price | intcomma }}</span>
+                                    </h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="listing-heading text-center">
+                                        <h4 class="text-primary">{{ product.title }}</h4>
+                                    </div>
+                                    <!-- <div class="row py-2 text-secondary">
+                                         {{ product.description }}
+                                    </div> -->
+                                    <div class="row text-secondary px-2">
+                                        <i class="fa fa-clock"></i> {{ product.created_at | timesince }}
+                                    </div>
+                                    <hr>
+                                    <a href="#" class="btn btn-primary btn-block">More Info</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                <p class="card-title">No Product Available</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block jquery %}
+    <script>
+        //$(document).ready(function(){
+          //  alert('hello')
+        //});
+    </script>
+{% endblock %}

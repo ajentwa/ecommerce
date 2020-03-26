@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+
+{% block content %}
+        <div class="row">
+            <div class="col-6 mx-auto">
+                <div class="card">
+                    <div class="card-header bg-white px-2 py-1">
+                        <h3>{{ title }}</h3>
+                    </div>
+                    <div class="card-body">
+                        {% if confirm_message %}
+                        <div class="card bg-success">
+                            <p class="card-title text-center text-white pt-1">{{ confirm_message }}</p>
+                        </div>
+                        {% endif %}
+                        {% if form %}
+                        <form action="{% url 'contacts:contact' %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}                            
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {%  bootstrap_field form.name addon_before='<i class="fas fa-user" aria-hidden="true"></i>' %}
+                                </div>
+                                <div class="col-md-12">
+                                    {%  bootstrap_field form.email %}
+                                </div>
+                                <div class="col-md-12">
+                                    {%  bootstrap_field form.comment %}
+                                </div>
+                            </div>
+                            {%  if form.maybemissing %}
+                            {%  bootstrap_field form.maybemissing %}
+                            {%  endif %}
+                            <a class="btn btn-secondary" href="{% url 'pages:home' %}">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                        {% else %}
+                            <!-- Alerts -->
+                            {% include 'partials/_alerts.html' %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+{% endblock %}
