@@ -11,6 +11,9 @@
                 {% url 'pages:about' as about %}
                 {% url 'products:list' as product %}
                 {% url 'contacts:contact' as contact %}
+                {% url 'account_login' as login %}
+                {% url 'account_logout' as logout %}
+                {% url 'account_signup' as signup %}
                 <li class="nav-item {% if request.path == home %} active {% endif %}">
                     <a class="nav-link" href="{% url 'pages:home' %}">Home</a>
                 </li>
@@ -23,11 +26,28 @@
                 <li class="nav-item {% if request.path == contact %} active {% endif %}">
                     <a class="nav-link" href="{% url 'contacts:contact' %}">Contact</a>
                 </li>
+                <li class="nav-item {% if request.path == contact %} active {% endif %}">
+                    <a class="nav-link" href="{% url 'pages:profile' %}">Profile</a>
+                </li>
             </ul>
-            <form class="form-inline mt-2 mt-md-0">
+            <ul class="navbar-nav">
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item {% if request.path == logout %} active {% endif %}">
+                        <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item {% if request.path == login %} active {% endif %}">
+                        <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                    </li>
+                    <li class="nav-item {% if request.path == signup %} active {% endif %}">
+                        <a class="nav-link" href="{% url 'account_signup' %}">Signup</a>
+                    </li>
+                {% endif %}
+            </ul>
+            <!-- <form class="form-inline mt-2 mt-md-0">
                 <input class="form-control form-control-sm mr-sm-2" type="text" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success btn-sm my-2 my-sm-0" type="submit">Search</button>
-            </form>
+            </form> -->
         </div>
     </div>
 </nav>
